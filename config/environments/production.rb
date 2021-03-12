@@ -79,6 +79,7 @@ Rails.application.configure do
     config.logger    = ActiveSupport::TaggedLogging.new(logger)
   end
 
+  ruby ENV['CUSTOM_RUBY_VERSION'] || '3.0.0'
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
