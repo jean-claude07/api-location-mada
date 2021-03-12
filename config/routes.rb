@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   resources :admins
   resources :produits
   resources :users 
-  root 'admins#racine'
+  root 'admins#index'
   post '/user_session', to: 'users#user_session'
   post '/admin_session', to: 'admins#admin_session'
   get '/user_counteur', to: 'users#counteur'
