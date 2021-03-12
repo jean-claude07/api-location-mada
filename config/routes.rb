@@ -5,7 +5,8 @@ Rails.application.routes.draw do
   resources :locations
   resources :admins
   resources :produits
-  resources :users
+  resources :users 
+  root 'admins#racine'
   post '/user_session', to: 'users#user_session'
   post '/admin_session', to: 'admins#admin_session'
   get '/user_counteur', to: 'users#counteur'

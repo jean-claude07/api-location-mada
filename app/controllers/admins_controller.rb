@@ -8,6 +8,10 @@ class AdminsController < ApplicationController
     render json: @admins
   end
 
+  def racine
+    render json: {message: 'kaiz kaiz'}
+  end
+
   # GET /admins/1
   def show
     token = encode_token({user_id: @admin.id})
