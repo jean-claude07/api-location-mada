@@ -45,10 +45,6 @@ gem 'rack-cors', '~> 1.1', '>= 1.1.1'
 gem 'simple_token_authentication'
 gem 'table_print'
 
-gem 'paperclip', '~> 6.1'
-gem 'paperclip-av-transcoder', '~> 0.6.4'
-gem 'aws-sdk-s3', '~> 1.85'
-
 gem 'jwt'
 # gem 'bcrypt-ruby'
 gem 'bcrypt', '~> 3.1', '>= 3.1.15'
