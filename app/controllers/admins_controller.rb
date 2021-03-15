@@ -12,12 +12,6 @@ class AdminsController < ApplicationController
     render json: {message: 'kaiz kaiz'}
   end
 
-  # GET /admins/1
-  def show
-    token = encode_token({user_id: @admin.id})
-    render json: {admin: @admin, token: token}
-  end
-
   def admin_session
     @admin = Admin.find_by_adminName(params[:adminName])
 
@@ -25,7 +19,7 @@ class AdminsController < ApplicationController
     if @admin && @admin.authenticate(params[:password])
       
       token = encode_token({user_id: @admin.id})
-      render json: {user: @admin, token: token}
+      render json: {user: {adminName: @admin.adminName, email: @admin.email, adminphoto: @admin.adminphoto}, token: token}
     else
       render json: {message: "Email ou mot de passe incorrect"}, status: 202
     end
@@ -38,7 +32,8 @@ class AdminsController < ApplicationController
 
     if @admin.save
       token = encode_token({user_id: @admin.id})
-      render json: {admin: @admin, status: :created, location: @admin, token: token}
+      render json: {admin: {adminName: @admin.adminName, email: @admin.email, adminphoto: @admin.adminphoto}, 
+      status: :created, location: {adminName: @admin.adminName, email: @admin.email, adminphoto: @admin.adminphoto}, token: token}
     else
       render json: @admin.errors, status: :unprocessable_entity
     end
@@ -51,6 +46,12 @@ class AdminsController < ApplicationController
     else
       render json: @admin.errors, status: :unprocessable_entity
     end
+  end
+
+  # GET /admins/1
+  def show
+    token = encode_token({user_id: @admin.id})
+    render json: {admin: {adminName: @admin.adminName, email: @admin.email, adminphoto: @admin.adminphoto}, token: token}
   end
 
   # DELETE /admins/1
