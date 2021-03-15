@@ -30,7 +30,9 @@ class UsersController < ApplicationController
     @userLocation = @user.locations
     counter = @userLocation.count
     token = encode_token({user_id: @user.id})
-    render json: {client: @user, token: token, location: @userLocation, allReservation: counter}
+    render json: {client: {username: @user.username, onligne: @user.onligne, email: @user.email, 
+    telephone: @user.telephone, password: @user.password, photoUser: @user.photoUser, 
+    authentication_token: @user.authentication_token, id: @user.id}, token: token, location: @userLocation, allReservation: counter}
   end
 
   # POST /users
@@ -39,7 +41,9 @@ class UsersController < ApplicationController
 
     if @user.save
       token = encode_token({user_id: @user.id})
-      render json: {user: @user, status: :created, location: @user, token: token}
+      render json: {user: {username: @user.username, onligne: @user.onligne, email: @user.email, 
+      telephone: @user.telephone, password: @user.password, photoUser: @user.photoUser, 
+      authentication_token: @user.authentication_token, id: @user.id}, status: :created, location: @user, token: token}
     else
       render json: @user.errors, status: :unprocessable_entity
     end
@@ -52,12 +56,16 @@ class UsersController < ApplicationController
     if @user && @user.authenticate(params[:password])
       
       token = encode_token({user_id: @user.id})
-      render json: {user: @user, token: token}
+      render json: {user: {username: @user.username, onligne: @user.onligne, email: @user.email, 
+      telephone: @user.telephone, password: @user.password, photoUser: @user.photoUser, 
+      authentication_token: @user.authentication_token, id: @user.id}, token: token}
       session[:current_user_id] = @user.id
     elsif user = User.find_by_password_digest(params[:password])
       if user
         token = encode_token({user_id: user.id})
-        render json: {user: user, token: token}
+        render json: {user: {username: user.username, onligne: user.onligne, email: user.email, 
+        telephone: user.telephone, password: user.password, photoUser: user.photoUser, 
+        authentication_token: user.authentication_token, id: user.id}, token: token}
       end
     else
       render json: {message: "Email ou mot de passe incorrect"}, status: 202

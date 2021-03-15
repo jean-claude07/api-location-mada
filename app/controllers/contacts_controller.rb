@@ -23,7 +23,9 @@ class ContactsController < ApplicationController
     @contact = Contact.new(contact_params)
 
     if @contact.save
-      render json: {messag: @contact, status: :created, location: @contact, notification: 'Votre message a été bien envoyer !'}
+      render json: {messag: {name: @contact.name, email: @contact.email, telephone: @contact.telephone, 
+      message: @contact.message, subject: @contact.subject, onligne: @contact.onligne}, 
+      status: :created, location: @contact, notification: 'Votre message a été bien envoyer !'}
     else
       render json: @contact.errors, status: :unprocessable_entity
     end

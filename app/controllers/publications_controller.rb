@@ -13,7 +13,8 @@ class PublicationsController < ApplicationController
     
       @count = @publication.like
       @counter = @count.count 
-    render json: {publication: @publication, like: @counter}
+    render json: {publication: {description: @publication.description, title: @publication.title, 
+    admin_id: @publication.admin_id, publishingphoto: @publication.publishingphoto}, like: @counter}
   end
 
   # POST /publications

@@ -25,7 +25,9 @@ class LocationsController < ApplicationController
     @location = Location.new(location_params)
 
     if @location.save
-      render json: {location: @location, status: :created, location: @location, message: "Reservation reusssie ..! Merci :-)"}
+      render json: {location: {id: @location.id, nomMvola: @location.nomMvola, nombre: @location.nombre, numero: @location.numero, 
+      nomProduit: @location.nomProduit, cout: @location.cout, payment: @location.payment, date: @location.date, 
+      user_id: @location.user_id, image: @location.image}, status: :created, location: @location, message: "Reservation reusssie ..! Merci :-)"}
     else
       render json: @location.errors, status: :unprocessable_entity
     end
@@ -34,7 +36,10 @@ class LocationsController < ApplicationController
   # PATCH/PUT /locations/1
   def update
     if @location.update(location_params)
-      render json: {location: @location, message: "Payment fait avec success!"}
+      render json: {location: {id: @location.id, nomMvola: @location.nomMvola, nombre: @location.nombre, numero: @location.numero, 
+      nomProduit: @location.nomProduit, cout: @location.cout, payment: @location.payment, date: @location.date, 
+      user_id: @location.user_id, image: @location.image}, 
+      message: "Payment fait avec success!"}
     else
       render json: @location.errors, status: :unprocessable_entity
     end
