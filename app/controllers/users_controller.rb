@@ -32,7 +32,9 @@ class UsersController < ApplicationController
     token = encode_token({user_id: @user.id})
     render json: {client: {username: @user.username, onligne: @user.onligne, email: @user.email, 
     telephone: @user.telephone, password: @user.password, photoUser: @user.photoUser, 
-    authentication_token: @user.authentication_token, id: @user.id}, token: token, location: @userLocation, allReservation: counter}
+    authentication_token: @user.authentication_token, id: @user.id}, token: token, location: {id: @userLocation.id, nomMvola: @userLocation.nomMvola, nombre: @userLocation.nombre, numero: @userLocation.numero, 
+    nomProduit: @userLocation.nomProduit, cout: @userLocation.cout, payment: @userLocation.payment, date: @userLocation.date, 
+    user_id: @userLocation.user_id, image: @userLocation.image}, allReservation: counter}
   end
 
   # POST /users
